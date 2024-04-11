@@ -7,7 +7,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GOOGLE_CREDS: ${{ secrets.GCP_CREDENTIALS }}
-  GITHUBTOKEN: ${{ secrets.SECRET_GITHUB_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.SECRET_GITHUB_TOKEN }}
   IMAGE: static-site
 
 jobs:
@@ -34,7 +34,7 @@ jobs:
         run: |
           docker build \
             -f dbt_worker.Dockerfile \
-            -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:latest \ 
+            -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:latest \
             --build-arg "github_token=$GITHUB_TOKEN" \
             --build-arg "google_credentials=$GOOGLE_CREDS" .
           .
