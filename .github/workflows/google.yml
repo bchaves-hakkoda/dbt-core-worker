@@ -15,7 +15,6 @@ jobs:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     environment: production
-    run: echo "$SECRET_GITHUB_TOKEN"
 
     permissions:
       contents: "read"
@@ -29,6 +28,13 @@ jobs:
         uses: "google-github-actions/auth@v2"
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+
+      -name: Log stuff    
+        run: |
+        echo "$SECRET_GITHUB_TOKEN" \
+        echo "$GCP_CREDENTIALS" \
+        echo "$GKE_PROJECT"
+
 
       # Build the Docker image
       - name: Build
