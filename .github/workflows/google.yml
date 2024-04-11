@@ -29,20 +29,12 @@ jobs:
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
-      - name: Log sensitive information
-        run: |
-          echo -n $SECRET_GITHUB_TOKEN
-          echo -n $GCP_CREDENTIALS
-          echo -n $GKE_PROJECT
-
       # Build the Docker image
       - name: Build
         run: |
           docker build \
             -f dbt_worker.Dockerfile \
-            -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:latest \
-            --build-arg "github_token=$GITHUB_TOKEN" \
-            --build-arg "google_credentials=$GOOGLE_CREDS" .
+            -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:latest .
           .
       # Push the Docker image to Google Artifact Registry
       - name: Publish
