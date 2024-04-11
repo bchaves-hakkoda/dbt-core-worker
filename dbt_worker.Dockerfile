@@ -49,8 +49,7 @@ ENV SNOWFLAKE_DATABASE=$snowflake_db
 ENV SNOWFLAKE_ROLE=$snowflake_role
 
 # Hardcoded for now
-ENV DBT_ENV_BRANCH=main 
-
+ENV DBT_ENV_BRANCH=main
 
 # Copy application code
 COPY ./app/ /usr/app/
