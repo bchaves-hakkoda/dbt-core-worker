@@ -32,9 +32,9 @@ jobs:
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
-      - name: Docker configuration
-        run: |-
-          echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
+      # - name: Docker configuration
+      #   run: |-
+      #     echo ${{steps.auth.outputs.access_token}} | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
 
       # Build the Docker image
       - name: Build
