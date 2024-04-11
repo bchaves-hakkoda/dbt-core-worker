@@ -29,7 +29,7 @@ jobs:
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
-      -name: Log stuff    
+      - name: Log stuff    
         run: |
         echo "$SECRET_GITHUB_TOKEN" \
         echo "$GCP_CREDENTIALS" \
