@@ -39,7 +39,7 @@ jobs:
                     -f dbt_worker.Dockerfile \
                     -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:latest \ 
                     --build-arg "github_token=$GITHUB_TOKEN" \
-                    --build-arg "google_credentials=$GOOGLE_CREDS" .     
+                    --build-arg "google_credentials=$GOOGLE_CREDS" .  
           .
       # Push the Docker image to Google Artifact Registry
       - name: Publish
