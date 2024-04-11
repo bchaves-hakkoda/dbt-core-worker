@@ -1,0 +1,35 @@
+name: Deploy DBT Core
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v2
+
+      - name: install the gcloud cli
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GKE_PROJECT }}
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+          export_default_credentials: true
+
+      - name: build and push the docker image
+        env:
+          GOOGLE_PROJECT: ${{ secrets.GKE_PROJECT }}
+          GOOGLE_CREDS: ${{ secrets.GCP_CREDENTIALS }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+          docker build \
+                    -f dbt_worker.Dockerfile \
+                    # Que deberia ir aca en -t?
+                    -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:dev:latest \ 
+                    --build-arg "github_token=$GITHUB_TOKEN" \
+                    --build-arg "google_credentials=$GOOGLE_CREDS" .           
+          docker push us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:dev:latest

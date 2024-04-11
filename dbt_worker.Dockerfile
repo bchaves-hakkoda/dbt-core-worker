@@ -31,6 +31,7 @@ ARG github_token
 ARG google_credentials
 ARG env_tag
 ARG dbt_schema
+
 #This SF variables will be moved to daily_job.sh when terraform resources are defined
 ARG snowflake_wh
 ARG snowflake_account
