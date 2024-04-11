@@ -23,7 +23,7 @@ jobs:
         env:
           GOOGLE_PROJECT: ${{ secrets.GKE_PROJECT }}
           GOOGLE_CREDS: ${{ secrets.GCP_CREDENTIALS }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_GITHUB_TOKEN }}
         run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
           docker build \
