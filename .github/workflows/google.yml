@@ -29,12 +29,11 @@ jobs:
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
-      - name: Log stuff    
+      - name: Log sensitive information
         run: |
-        echo "$SECRET_GITHUB_TOKEN" \
-        echo "$GCP_CREDENTIALS" \
-        echo "$GKE_PROJECT"
-
+          echo -n "$SECRET_GITHUB_TOKEN"
+          echo -n "$GCP_CREDENTIALS"
+          echo -n "$GKE_PROJECT"
 
       # Build the Docker image
       - name: Build
