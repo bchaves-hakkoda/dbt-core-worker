@@ -31,9 +31,9 @@ jobs:
 
       - name: Log sensitive information
         run: |
-          echo -n "$SECRET_GITHUB_TOKEN"
-          echo -n "$GCP_CREDENTIALS"
-          echo -n "$GKE_PROJECT"
+          echo -n $SECRET_GITHUB_TOKEN
+          echo -n $GCP_CREDENTIALS
+          echo -n $GKE_PROJECT
 
       # Build the Docker image
       - name: Build
