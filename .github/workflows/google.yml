@@ -35,7 +35,7 @@ jobs:
           docker build \
             -f dbt_worker.Dockerfile \
             -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:latest .
-          .
+
       # Push the Docker image to Google Artifact Registry
       - name: Publish
         run: |
