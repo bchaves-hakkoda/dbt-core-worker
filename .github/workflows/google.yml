@@ -32,24 +32,18 @@ jobs:
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v1"
 
-      - name: "Use gcloud CLI"
-        run: "gcloud info"
-
+      # Auth into docker
       - name: "Docker auth"
         run: |-
           gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
-
-      # Debugging step: Print access token
-      - name: Debug - Print access token
-        run: |
-          gcloud auth print-access-token
 
       # Build the Docker image
       - name: Build
         run: |
           docker build \
             -f dbt_worker.Dockerfile \
-            -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:latest .
+            -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:latest \
+            --build-arg "google_credentials=$GOOGLE_CREDS" .
 
       # Push the Docker image to Google Artifact Registry
       - name: Publish
