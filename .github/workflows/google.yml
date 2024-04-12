@@ -37,11 +37,6 @@ jobs:
         run: |-
           gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
 
-      # - name: Set up credentials for
-      #   run: |
-      #     # Access the secret and store it in a file
-      #     echo "${{ secrets.GCP_CREDENTIALS }}" > google_creds_key.json
-
       # Build the Docker image
       - name: Build
         run: |
@@ -49,6 +44,7 @@ jobs:
           docker build \
             -f dbt_worker.Dockerfile \
             -t us-central1-docker.pkg.dev/terraform-poc-417803/dbt-core-worker/dbtcoreworker:latest \
+            --build-arg "github_token=$GITHUB_TOKEN" \
             --build-arg "google_credentials=./google_creds_key.json" .
 
       # Push the Docker image to Google Artifact Registry
