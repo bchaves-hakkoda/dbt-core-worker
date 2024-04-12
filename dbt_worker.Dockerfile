@@ -64,6 +64,5 @@ COPY $google_credentials /usr/app/gcp-creds.json
 
 ENV GOOGLE_APPLICATION_CREDENTIALS="/usr/app/gcp-creds.json"
 
-
 # Install Python dependencies
 RUN pip install dbt-core dbt-snowflake
