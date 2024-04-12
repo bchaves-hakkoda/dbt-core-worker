@@ -39,6 +39,11 @@ jobs:
         run: |-
           gcloud auth configure-docker central1-docker.pkg.dev --quiet
 
+      # Debugging step: Print access token
+      - name: Debug - Print access token
+        run: |
+          gcloud auth print-access-token
+
       # Build the Docker image
       - name: Build
         run: |
