@@ -37,7 +37,7 @@ jobs:
 
       - name: "Docker auth"
         run: |-
-          gcloud auth configure-docker central1-docker.pkg.dev --quiet
+          gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
 
       # Debugging step: Print access token
       - name: Debug - Print access token
