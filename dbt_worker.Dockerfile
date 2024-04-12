@@ -41,7 +41,7 @@ ARG snowflake_role
 
 ENV GITHUB_TOKEN=$github_token
 ENV DEBUG_MODE=1
-
+RUN echo "Google Credentials: $google_credentials"
 #Snoflake vars
 ENV SNOWFLAKE_WAREHOUSE=$snowflake_wh
 ENV SNOWFLAKE_ACCOUNT=$snowflake_account
